@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title> registartion sucessful</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'register/css/login.css' %}">
+
+  <style>
+  body
+  {
+    background-color: black;
+  }
+    #sty {
+      border-radius: 25px;
+      border-color:red;
+      background: #73AD21;
+      display: inline-block;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 500px;
+      height: 200px;
+      margin: auto;
+      background-color: black;
+    }
+    .colorlib-loader {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      width: 120%;
+      height: 500%;
+      z-index: 9999;
+      background: url(../images/loader.gif) center no-repeat #fff; }
+  </style>
+
+</head>
+<body>
+<div id="sty" ><i><h2 style="color:pink"> <pre> <br>                WELCOME!!<br><br>         REGISTERED SUCCESSFULLY!! <br> </pre>
+<pre>........REDIRECTING TO LOGIN PAGE........<br> <br>  </h2></i></pre> 
+
+
+<script>
+setTimeout(function(){ location.assign("{% url 'login' %}");
+}, 2000);
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet"
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="{% url 'register' %}"><h2 style="color:violet">Chatthru..!</h2></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><h4 style="color:green">Home</h4></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><h4 style="color:red">profile</h4></a>
+      </li>
+      
+    </ul>
+   
+                  <a class="nav-link" href="{% url 'register' %}"><h4 style="color:red">Log out</h4></a>
+
+  </div>
+</nav>
+
+<style type="text/css">
+    div.left
+    {
+      width:300px;
+            padding: 10px;
+            background-color: yellow;
+            border-radius: 20px;
+            margin-top: 20px;
+
+
+    }
+    div.right
+    {
+        width:300px;
+      margin-left:130px;
+      padding:10px;
+      background-color: violet ;
+      border-radius: 20px;
+      margin-top:20px;
+      
+      }
+      #element1 {display:inline-block;margin-right:10px; } 
+#element2 {display:inline-block;  float: right } 
+   div.bottom
+   {
+    display: inline-block;
+    height: 100%;
+    vertical-align: bottom;
+    width: 0px;
+   }
+   ::placeholder {
+  color: red;
+  font-size: 1em;
+}
+::-webkit-scrollbar { 
+    display: none; 
+}
+  </style>
+</head>
+<body >
+
+   <br>   
+    <div class="container">
+  <div class="row" >
+    <div class="col-3"></div>
+
+    <div class ="col-5" style="background-color: black;border-radius: 20px;">
+       <br>
+       <h1 id="element1" style="color: green"><pre style="color:green"><legend><i>{{receiver}}</i></legend></pre></h1>
+
+       <a href="{% url 'home' %}" class="btn btn-success" id="element2">
+          <span class="glyphicon glyphicon-arrow-left"></span> Back
+        </a>
+       <br><br>
+       <div class="container" id="scroll" style="height: 320px;overflow-y: scroll;">
+
+        {% for message in messages %}
+            {% if sender == message.sender %}
+                  <div class="right">
+                 <p>
+                  <span style="display:block">{{message.message}}</span>
+                  <span style="float:right">{{ message.time }}</span>
+                 </p>
+               </div>
+          {% endif %}
+          {% if sender == message.receiver %}
+                         <div class="left">
+                   <p>
+                    <span style="display:block">{{ message.message}}</span>
+                    <span style="float:right">{{ message.time }}</span>
+                   </p>
+                 </div>
+          {% endif %}
+        {% endfor %}
+      
+
+          
+      
+
+      
+     </div>
+       <form method="POST" id="post_send">
+        {% csrf_token %}
+  <input type="text" name="message" style="border-radius: 10px;width:300px;background-color: white;color:green;font-family: courier;position: relative;top:0px;margin-top:20px;float: left;"  placeholder=" Type your message...">
+  <button class="btn btn-success" type="submit" name="action" style="height:42px;position: relative;
+  top: -50px;margin-left: 310px" id="submit_value">Send
+    <i class="material-icons right">send</i>
+
+  </form>
+    
+
+        
+    </div>
+    <div class="col-4" ></div>
+    
+</div>
+</div>
+
+<script type="text/javascript">
+
+var objDiv = document.getElementById("scroll");
+objDiv.scrollTop = objDiv.scrollHeight;
+
+
+
+
+// $(document).ready(function () {
+//   //your code here
+
+// $('#post_send').on('submit', function(event){
+  
+//     console.log("form submitted!")  // sanity check
+//     create();
+// });
+
+
+
+// });
+// </script>
+
+ <script>
+
+// function create() {
+//     $.ajax({
+//         url : "check/", // the endpoint
+//         type : "POST", // http method
+//         data : { message : $('#submit_value').val() }, // data sent with the post request
+
+//         // handle a successful response
+//         success : function(json) {
+//             $('#post-text').val(''); // remove the value from the input
+            
+//         },
+
+//         // handle a non-successful response
+//         error : function(xhr,errmsg,err) {
+//             $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+//                 " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+//             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+//         }
+//     });
+// };
+  
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+</html>
